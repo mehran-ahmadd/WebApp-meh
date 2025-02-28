@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using WebApp_meh.Data;
+
 namespace WebApp_meh
 {
     public class Program
@@ -8,6 +11,9 @@ namespace WebApp_meh
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            var connectionString = builder.Configuration.GetConnectionString("AzureSqlConnection");
+            builder.Services.AddDbContext<appDbContext>(options => { options.UseSqlServer(connectionString); });
 
             var app = builder.Build();
 
